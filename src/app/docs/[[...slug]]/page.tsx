@@ -8,6 +8,8 @@ import {
 import { notFound } from 'next/navigation';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getMDXComponents } from '@/mdx-components';
+import { Rate } from '@/components/rate';
+import posthog from 'posthog-js';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -30,6 +32,14 @@ export default async function Page(props: {
           })}
         />
       </DocsBody>
+      <Rate
+        onRateAction={async (url, feedback) => {
+          'use server';
+          await posthog.capture('on_rate_docs', feedback);
+          // Return a dummy githubUrl since we're not actually creating a GitHub issue
+          return { githubUrl: '#' };
+        }}
+      />
     </DocsPage>
   );
 }

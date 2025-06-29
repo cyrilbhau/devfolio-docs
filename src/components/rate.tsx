@@ -1,10 +1,26 @@
 'use client';
-
 import { cn } from '@/lib/utils';
+import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
-import { type FormEvent, useState, useEffect } from 'react';
-import { Collapsible, CollapsibleContent } from 'fumadocs-ui/components/ui/collapsible';
+import { type SyntheticEvent, useEffect, useState, useTransition } from 'react';
+import {
+  Collapsible,
+  CollapsibleContent,
+} from 'fumadocs-ui/components/ui/collapsible';
+import { cva } from 'class-variance-authority';
 import { usePathname } from 'next/navigation';
+
+const rateButtonVariants = cva(
+  'inline-flex items-center gap-2 px-3 py-2 rounded-full font-medium border text-sm [&_svg]:size-4 disabled:cursor-not-allowed',
+  {
+    variants: {
+      active: {
+        true: 'bg-fd-accent text-fd-accent-foreground [&_svg]:fill-current',
+        false: 'text-fd-muted-foreground',
+      },
+    },
+  },
+);
 
 export interface Feedback {
   opinion: 'good' | 'bad';
@@ -25,175 +41,135 @@ export function Rate({
 }: {
   onRateAction: (url: string, feedback: Feedback) => Promise<ActionResponse>;
 }) {
-  const url = usePathname() || '';
+  const url = usePathname();
   const [previous, setPrevious] = useState<Result | null>(null);
   const [opinion, setOpinion] = useState<'good' | 'bad' | null>(null);
   const [message, setMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  // Load previous feedback from localStorage
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
     const item = localStorage.getItem(`docs-feedback-${url}`);
-    if (item) {
-      try {
-        const parsed = JSON.parse(item);
-        if (parsed && typeof parsed === 'object') {
-          setPrevious(parsed);
-        }
-      } catch (e) {
-        console.error('Failed to parse stored feedback', e);
-      }
-    }
+
+    if (item === null) return;
+    setPrevious(JSON.parse(item) as Result);
   }, [url]);
 
-  async function submit(e: FormEvent) {
-    e.preventDefault();
-    
-    if (!opinion || !url) return;
+  useEffect(() => {
+    const key = `docs-feedback-${url}`;
 
-    const feedback: Feedback = {
-      opinion,
-      message,
-      url,
-    };
+    if (previous) localStorage.setItem(key, JSON.stringify(previous));
+    else localStorage.removeItem(key);
+  }, [previous, url]);
 
-    setIsSubmitting(true);
-    try {
-      const response = await onRateAction(url, feedback);
-      const result = {
-        ...feedback,
-        response,
+  function submit(e?: SyntheticEvent) {
+    if (opinion == null) return;
+
+    startTransition(async () => {
+      const feedback: Feedback = {
+        opinion,
+        message,
       };
-      
-      setPrevious(result);
-      setMessage('');
-      setOpinion(null);
-      
-      // Store in localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(`docs-feedback-${url}`, JSON.stringify(result));
-      }
-    } catch (error) {
-      console.error('Failed to submit feedback:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
+
+      void onRateAction(url, feedback).then((response) => {
+        setPrevious({
+          response,
+          ...feedback,
+        });
+        setMessage('');
+        setOpinion(null);
+      });
+    });
+
+    e?.preventDefault();
   }
 
   const activeOpinion = previous?.opinion ?? opinion;
-  const isSubmitted = !!previous;
-
-  // Only render on client-side to avoid hydration mismatch
-  const [isMounted, setIsMounted] = useState(false);
-  
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null; // Skip server-side rendering
-  }
 
   return (
-    <div className="mt-16 mb-8">
-      <div className="border-t border-border pt-8">
-        <Collapsible 
-          open={Boolean(opinion !== null || isSubmitted)}
-          onOpenChange={(open) => !open && setOpinion(null)}
+    <Collapsible
+      open={opinion !== null || previous !== null}
+      onOpenChange={(v) => {
+        if (!v) setOpinion(null);
+      }}
+      className="border-y py-3"
+    >
+      <div className="flex flex-row items-center gap-2">
+        <p className="text-sm font-medium pe-2">How is this guide?</p>
+        <button
+          disabled={previous !== null}
+          className={cn(
+            rateButtonVariants({
+              active: activeOpinion === 'good',
+            }),
+          )}
+          onClick={() => {
+            setOpinion('good');
+          }}
         >
-          <div className="flex flex-col gap-4">
-            <p className="text-sm font-medium text-foreground">How is this guide?</p>
+          <ThumbsUp />
+          Good
+        </button>
+        <button
+          disabled={previous !== null}
+          className={cn(
+            rateButtonVariants({
+              active: activeOpinion === 'bad',
+            }),
+          )}
+          onClick={() => {
+            setOpinion('bad');
+          }}
+        >
+          <ThumbsDown />
+          Bad
+        </button>
+      </div>
+      <CollapsibleContent className="mt-3">
+        {previous ? (
+          <div className="px-3 py-6 flex flex-col items-center gap-3 bg-fd-card text-fd-muted-foreground text-sm text-center rounded-xl">
+            <p>Thank you for your feedback!</p>
             <div className="flex flex-row items-center gap-2">
               <button
-                type="button"
-                disabled={isSubmitted}
                 className={cn(
-                  'inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium border',
-                  activeOpinion === 'good' 
-                    ? 'bg-accent text-accent-foreground border-accent' 
-                    : 'text-muted-foreground hover:bg-accent/50 border-border',
-                  isSubmitted && 'opacity-50 cursor-not-allowed'
+                  buttonVariants({
+                    color: 'secondary',
+                  }),
+                  'text-xs',
                 )}
-                onClick={() => setOpinion('good')}
+                onClick={() => {
+                  setOpinion(previous.opinion);
+                  setPrevious(null);
+                }}
               >
-                <ThumbsUp className="h-4 w-4" />
-                Yes
-              </button>
-              <button
-                type="button"
-                disabled={isSubmitted}
-                className={cn(
-                  'inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium border',
-                  activeOpinion === 'bad'
-                    ? 'bg-accent text-accent-foreground border-accent'
-                    : 'text-muted-foreground hover:bg-accent/50 border-border',
-                  isSubmitted && 'opacity-50 cursor-not-allowed'
-                )}
-                onClick={() => setOpinion('bad')}
-              >
-                <ThumbsDown className="h-4 w-4" />
-                No
+                Submit Again
               </button>
             </div>
           </div>
-
-          <CollapsibleContent className="mt-4">
-            {isSubmitted ? (
-              <div className="py-4 text-sm text-muted-foreground">
-                <p className="mb-3">Thank you for your feedback!</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (previous) {
-                      setOpinion(previous.opinion);
-                      setMessage(previous.message);
-                      setPrevious(null);
-                      
-                      // Remove from localStorage
-                      if (typeof window !== 'undefined') {
-                        localStorage.removeItem(`docs-feedback-${url}`);
-                      }
-                    }
-                  }}
-                  className="text-sm text-primary hover:underline"
-                >
-                  Submit again
-                </button>
-              </div>
-            ) : (
-              <form className="mt-4 flex flex-col gap-3" onSubmit={submit}>
-                <textarea
-                  autoFocus
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  placeholder="What can we improve? (Optional)"
-                  onKeyDown={(e) => {
-                    if (!e.shiftKey && e.key === 'Enter') {
-                      e.preventDefault();
-                      submit(e);
-                    }
-                  }}
-                />
-                <div className="flex justify-end">
-                  <button
-                    type="submit"
-                    className={cn(
-                      'inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                      isSubmitting && 'opacity-50 cursor-not-allowed'
-                    )}
-                    disabled={isSubmitting || !opinion}
-                  >
-                    {isSubmitting ? 'Sending...' : 'Submit'}
-                  </button>
-                </div>
-              </form>
-            )}
-          </CollapsibleContent>
-        </Collapsible>
-      </div>
-    </div>
+        ) : (
+          <form className="flex flex-col gap-3" onSubmit={submit}>
+            <textarea
+              autoFocus
+              required
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="border rounded-lg bg-fd-secondary text-fd-secondary-foreground p-3 resize-none focus-visible:outline-none placeholder:text-fd-muted-foreground"
+              placeholder="Leave your feedback..."
+              onKeyDown={(e) => {
+                if (!e.shiftKey && e.key === 'Enter') {
+                  submit(e);
+                }
+              }}
+            />
+            <button
+              type="submit"
+              className={cn(buttonVariants({ color: 'outline' }), 'w-fit px-3')}
+              disabled={isPending}
+            >
+              Submit
+            </button>
+          </form>
+        )}
+      </CollapsibleContent>
+    </Collapsible>
   );
 }

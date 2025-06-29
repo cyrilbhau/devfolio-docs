@@ -34,12 +34,6 @@ export function DocsLayoutWrapper({ children, tree }: DocsLayoutWrapperProps) {
       }}
     >
       {children}
-      {/* Add feedback section at the bottom of the content */}
-      <div className="mt-16 border-t border-border pt-8">
-        <p className="text-center text-sm text-muted-foreground">
-          Was this page helpful? Let us know how we can improve.
-        </p>
-      </div>
     </DocsLayout>
   );
 }

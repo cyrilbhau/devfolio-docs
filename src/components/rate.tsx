@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useState, useEffect } from 'react';
 import { Collapsible, CollapsibleContent } from 'fumadocs-ui/components/ui/collapsible';
 import { usePathname } from 'next/navigation';
 
@@ -32,7 +32,9 @@ export function Rate({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Load previous feedback from localStorage
-  if (typeof window !== 'undefined' && !previous) {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const item = localStorage.getItem(`docs-feedback-${url}`);
     if (item) {
       try {
@@ -44,7 +46,7 @@ export function Rate({
         console.error('Failed to parse stored feedback', e);
       }
     }
-  }
+  }, [url]);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -83,11 +85,22 @@ export function Rate({
   const activeOpinion = previous?.opinion ?? opinion;
   const isSubmitted = !!previous;
 
+  // Only render on client-side to avoid hydration mismatch
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // Skip server-side rendering
+  }
+
   return (
     <div className="mt-16 mb-8">
       <div className="border-t border-border pt-8">
         <Collapsible 
-          open={opinion !== null || isSubmitted}
+          open={Boolean(opinion !== null || isSubmitted)}
           onOpenChange={(open) => !open && setOpinion(null)}
         >
           <div className="flex flex-col gap-4">

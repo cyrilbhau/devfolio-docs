@@ -1,0 +1,23 @@
+{
+  "title": "Framework",
+  "description": "The docs framework",
+  "icon": "Building",
+  "root": true,
+  "pages": [
+    "---💙 DEVFOLIO GLOSSARY---",
+    
+    "fun", "modes","quadratic-voting", 
+    "cryptocheer", 
+    "judging",
+    "onchain-credentials",
+    
+    "---🤹🏻‍♂️ DEVFOLIO FOR ORGANISERS---",
+    "set-up-your-first-hackathon-on-devfolio",
+    
+    "---👨‍💻 DEVFOLIO FOR HACKERS---",
+    "page-conventions",
+    "markdown",
+    "navigation"
+    
+  ]
+}

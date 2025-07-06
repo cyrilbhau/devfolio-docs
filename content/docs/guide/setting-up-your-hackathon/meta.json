@@ -1,0 +1,17 @@
+{
+  "title": "🔨 Setting up your Hackathon",
+  "description": "Tabs to configure your hackathon on Devfolio",
+  "icon": "Hammer",
+  "root": true,
+  "pages": [
+    "basic-tab",
+    "application-tab",
+    "links-tab",
+    "brand-tab",
+    "dates-tab",
+    "prizes-tab",
+    "judges-tab",
+    "partner-tab",
+    "faqs-tab"
+  ]
+}

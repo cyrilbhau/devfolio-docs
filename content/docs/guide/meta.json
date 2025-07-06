@@ -1,0 +1,34 @@
+{
+  "title": "Devfolio",
+  "description": "This is devfolio docs",
+  "icon": "Building",
+  "root": true,
+  "pages": [
+    "---💙 DEVFOLIO GLOSSARY---",
+    
+    "fun", "modes","quadratic-voting", 
+    "cryptocheer", "judging",
+    "onchain-credentials",
+    
+    "---🤹🏻‍♂️ DEVFOLIO FOR ORGANISERS---",
+
+    "set-up-your-first-hackathon-on-devfolio",
+    "setting-up-your-hackathon",
+    "organizer-dashboard",
+    "wrapping-up-the-hackathon",
+    "apply-with-devfolio-integration",
+    "leaderboard",
+    "faqs-for-organizers",
+    
+    "---👨‍💻 DEVFOLIO FOR HACKERS---",
+    "page-conventions",
+    "markdown",
+    "navigation",
+    "introduction",
+    "your-devfolio-profile",
+    "participating-in-hackathons",
+    "faqs-for-hackers"
+
+   
+  ]
+}

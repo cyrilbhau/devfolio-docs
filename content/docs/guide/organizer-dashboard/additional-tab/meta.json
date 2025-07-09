@@ -2,7 +2,6 @@
   "title": " 👑 Admin Tab",
   "description": "Tabs to configure your hackathon on Devfolio",
   "icon": "Building",
-  "root": true,
   "pages": [
    "volunteer-tab", "logistic-tab"
     

@@ -4,13 +4,13 @@
   "icon": "Building",
   "root": true,
   "pages": [
-    "---💙 DEVFOLIO GLOSSARY---",
+    "---💙 Devfolio Glossary                           ---",
     
     "fun", "modes","quadratic-voting", 
     "cryptocheer", "judging",
     "onchain-credentials",
     
-    "---🤹🏻‍♂️ DEVFOLIO FOR ORGANISERS---",
+    "---🤹🏻‍♂️ Devfolio for organizers---",
 
     "set-up-your-first-hackathon-on-devfolio",
     "setting-up-your-hackathon",
@@ -20,7 +20,7 @@
     "leaderboard",
     "faqs-for-organizers",
     
-    "---👨‍💻 DEVFOLIO FOR HACKERS---",
+    "---👨‍💻 Devfolio for Hackers---",
     "page-conventions",
     "markdown",
     "navigation",

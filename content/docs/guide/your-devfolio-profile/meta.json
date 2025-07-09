@@ -2,7 +2,6 @@
   "title": "⭐ Your devfolio profile",
   "description": "This is your devfolio docs",
   "icon": "Building",
-  "root": true,
   "pages": [
     "signing-up", "profile", "settings", "my-devfolio", "projects",
     "badges", "claims", "inspire-me"

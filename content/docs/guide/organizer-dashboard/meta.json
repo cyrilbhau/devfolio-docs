@@ -2,7 +2,6 @@
   "title": "✨ Organizer Dashboard",
   "description": "Tabs to configure your hackathon on Devfolio",
   "icon": "Building",
-  "root": true,
   "pages": [
      "overview-tab",
   "review-tab",

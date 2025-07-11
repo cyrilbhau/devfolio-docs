@@ -13,15 +13,15 @@ const inter = Inter({
 });
 
 // Initialize PostHog if we're in the browser
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || '', {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    capture_pageview: false, // We'll handle page views manually
-    session_recording: {
-      maskAllInputs: false
-    },
-  });
-}
+// if (typeof window !== 'undefined') {
+//   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || '', {
+//     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+//     capture_pageview: false, // We'll handle page views manually
+//     session_recording: {
+//       maskAllInputs: false
+//     },
+//   });
+// }
 
 // Client-side only component for analytics
 function Analytics() {

@@ -3,76 +3,63 @@ title: 😄 Profile Tab
 description: Showcase your projects, skills, and experience on your Devfolio Profile 💪🏻
 ---
 
-# 😄 Your Devfolio Profile
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 
 You can access the Profile Tab by clicking on your profile in the top right corner, which opens a dropdown menu.
 
-<Callout type="info">
-For Beta users seeing the v2 UI, this button will be called 'Edit Profile'
-</Callout>
+<img src="/assets/image (2) (1) (1) (1) (1).png" alt="Profile Tab Menu" />
 
-<img src="/assets/image-profile-tab.png" alt="Accessing Profile Tab" />
+### To make your profile stand out, fill out the below sections:
 
-## To make your profile stand out, fill out the below sections:
+<Tabs items={["About", "Education", "Experience", "Links", "Contact"]} defaultValue="About">
+  <Tab value="About">
+    Kick-start here by updating your profile with basic information.
 
-### About Section
+    <img src="/assets/image (174).png" alt="About Section" />
+  </Tab>
 
-Kick-start here by updating your profile with basic information, such as your name, identified gender, food preferences, and t-shirt size.
+  <Tab value="Education">
+    This section is completely dedicated to your education background.
 
-This helps hackathon organizers gather your dietary preferences and schwag sizes with ease!
+    <img src="/assets/image (175).png" alt="Education Section" />
+  </Tab>
 
-<Callout type="info">
-Psst! The 'About you' section supports full Markdown editing!
-</Callout>
+  <Tab value="Experience">
+    This section covers the professional experience in terms of skills and work experience.
 
-<img src="/assets/image-about.png" alt="About Section" />
+    <img src="/assets/image (176).png" alt="Experience Section" />
 
-### Education Section
+    > 💡 **Tip**  
+    > You can drag-and-drop to rearrange the options.
+  </Tab>
 
-This section is completely dedicated to your education background. You can choose to input your degree type, educational institution, field of study, and the start and end date of your education.
+  <Tab value="Links">
+    Add links like a personal website, GitHub, LinkedIn, or any such important links which you wish to display on your Profile.
 
-If you're someone who doesn't have a formal education, don't worry! We strive to be inclusive for all builders, irrespective of their educational background. You can simply click on the appropriate checkbox to proceed to the next section.
+    <img src="/assets/image (177).png" alt="Links Section" />
+  </Tab>
 
-<img src="/assets/image-education.png" alt="Education Section" />
+  <Tab value="Contact">
+    You can add your contact information here:
 
-### Experience Section
+    <img src="/assets/image (179).png" alt="Contact Section" />
 
-This section covers the professional experience in terms of skills and work experience. You can choose to manually enter these details, or you can upload a recent copy of your resume to have our systems auto-magically enter your work experience. Cool, right?
+    ### You can add/edit the following details:
+    - Email ID (associated with Devfolio account)
+    - Phone Number
+    - City
 
-<img src="/assets/image-experience.png" alt="Experience Section" />
-
-### Links Section
-
-Add links like a personal website, GitHub, LinkedIn, or any such important links which you wish to display on your Profile. This enables hackathon organizers and profile visitors to see your social links and also helps showcase your online presence. Depending on the link entered, we'll automatically fetch the name of the website.
-
-<Callout type="info">
-Please make sure that your links have an "https://" or an "http://" prefix for it to be properly registered in our systems.
-</Callout>
-
-<img src="/assets/image-links.png" alt="Links Section" />
-
-### Contact Section
-
-You can add your contact information here. This will be private and only visible to the hackathon organizers. You can also add your emergency contact details here.
-
-<img src="/assets/image-contact.png" alt="Contact Section" />
-
-<Callout type="success">
-Your changes are auto-saved on the fly, so don't worry about losing your progress.
-</Callout>
+    ### You also have an option to add emergency details:
+    - Emergency Contact Name
+    - Emergency Contact Number
+  </Tab>
+</Tabs>
 
 ---
 
-🎉 Congratulations! You have successfully completed your Devfolio Profile! To see how it would look to the world, click on your username in the top-right corner, and visit [`My Devfolio`](my-devfolio.md).
+## 🔒 Profile Visibility
 
----
+Your profile is public by default. If you wish to make it private, you can do so in the [**Settings Tab**](settings.md)
 
-### Profile Visibility
-
-Your profile is public by default. If you wish to make it private, you can do so in the Settings Tab:
-
-<ContentRef url="../settings.md" />
-
-<Callout type="info">
-Hackathon organizers will be going through your Devfolio profile as well. So, we recommend updating the profile with as much information regarding your experience and skills as possible.
-</Callout>
+> 💡 **Heads-up**  
+> The organizers will be going through your Devfolio profile as well. So, we recommend updating the profile with as much information regarding your experience and skills as possible.

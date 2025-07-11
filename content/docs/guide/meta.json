@@ -1,10 +1,10 @@
 {
-  "title": "Devfolio",
+  "title": "Hello Builders",
   "description": "This is devfolio docs",
   "icon": "Building",
   "root": true,
   "pages": [
-    "---💙 Devfolio Glossary                           ---",
+    "---💙 Devfolio Glossary---",
     
     "fun", "modes","quadratic-voting", 
     "cryptocheer", "judging",

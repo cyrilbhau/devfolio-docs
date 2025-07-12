@@ -13,6 +13,15 @@ const config = {
       },
     ];
   },
+  redirects: async () => {
+    return [
+      {
+        source: "/",
+        destination: "/docs/guide/fun",
+        permanent: true, // set to false if it's a temporary redirect
+      },
+    ];
+  },
 };
 
 export default withMDX(config);

@@ -58,7 +58,7 @@ export default async function Page(props: {
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
-        {/*@ts-expect-error*/}
+        {/*@ts-expect-error: this library type is incorrect in v3*/}
         <LLMCopyButton slug={params.slug} />
         <ViewOptions markdownUrl={`${page.url}.mdx`} githubUrl={`check`} />
         <AISearchTrigger

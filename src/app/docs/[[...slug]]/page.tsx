@@ -1,15 +1,16 @@
-import { source } from '@/lib/source';
+import { source } from "@/lib/source";
 import {
   DocsPage,
   DocsBody,
   DocsDescription,
   DocsTitle,
-} from 'fumadocs-ui/page';
-import { notFound } from 'next/navigation';
-import { createRelativeLink } from 'fumadocs-ui/mdx';
-import { getMDXComponents } from '@/mdx-components';
-import posthog from 'posthog-js';
-import { Rate } from '@/components/rate';
+} from "fumadocs-ui/page";
+import { notFound } from "next/navigation";
+import { createRelativeLink } from "fumadocs-ui/mdx";
+import { getMDXComponents } from "@/mdx-components";
+import posthog from "posthog-js";
+import { Rate } from "@/components/rate";
+import { LLMCopyButton, ViewOptions } from "./page.client";
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -23,6 +24,10 @@ export default async function Page(props: {
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
+      <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
+        <LLMCopyButton slug={params.slug} />
+        <ViewOptions markdownUrl={`${page.url}.mdx`} githubUrl={`check`} />
+      </div>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDXContent
@@ -34,9 +39,9 @@ export default async function Page(props: {
       </DocsBody>
       <Rate
         onRateAction={async (url, feedback) => {
-          'use server';
-          await posthog.capture('on_rate_docs', feedback);
-          return { githubUrl: 'https://github.com/devfolioco' };
+          "use server";
+          await posthog.capture("on_rate_docs", feedback);
+          return { githubUrl: "https://github.com/devfolioco" };
         }}
       />
     </DocsPage>

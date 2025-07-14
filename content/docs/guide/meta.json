@@ -9,7 +9,6 @@
     "creating-and-managing-your-account",
     "linking-your-ethereum-wallet",
     "settings",
-    "fun",
 
     "---👨‍💻 Devfolio for Hackers---",
     "start-your-devfolio-hacker-experience-here",
@@ -20,11 +19,6 @@
     "Projects",
     "participating-in-hackathons",
     "faqs-for-hackers",
-
-    "---💙 Onchain Features---",
-    "quadratic-voting",
-    "cryptocheer",
-    "onchain-credentials",
 
     "---🤹🏻‍♂️ Devfolio for organizers---",
     "why-devfolio",
@@ -38,7 +32,11 @@
     "leaderboard",
     "organizer-judging",
     "faqs-for-organizers",
-    "set-up-your-first-hackathon-on-devfolio",
+
+    "---💙 Onchain Features---",
+    "quadratic-voting",
+    "cryptocheer",
+    "onchain-credentials",
 
     "---🧑‍🏫 Devfolio for Judges---",
     "judging",

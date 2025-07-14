@@ -10,22 +10,24 @@
     "linking-your-ethereum-wallet",
     "settings",
     "fun",
-    "modes",
     "quadratic-voting",
     "cryptocheer",
-    "judging",
+
     "onchain-credentials",
 
     "---🤹🏻‍♂️ Devfolio for organizers---",
     "why-devfolio",
-
-    "set-up-your-first-hackathon-on-devfolio",
+    "modes",
+    "setting-up-a-hackathon-for-business",
+    "setting-up-a-hackathon-for-universities",
     "setting-up-your-hackathon",
     "organizer-dashboard",
     "wrapping-up-the-hackathon",
     "apply-with-devfolio-integration",
     "leaderboard",
+    "organizer-judging",
     "faqs-for-organizers",
+    "set-up-your-first-hackathon-on-devfolio",
 
     "---👨‍💻 Devfolio for Hackers---",
     "page-conventions",
@@ -34,6 +36,11 @@
     "introduction",
     "your-devfolio-profile",
     "participating-in-hackathons",
-    "faqs-for-hackers"
+    "faqs-for-hackers",
+    "---🧑‍🏫 Devfolio for Judges---",
+    "judging",
+    "offline-judging",
+    "online-judging",
+    "sponsor-judging"
   ]
 }

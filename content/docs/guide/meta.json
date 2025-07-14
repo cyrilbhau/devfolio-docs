@@ -5,11 +5,14 @@
   "root": true,
   "pages": [
     "---💙 Devfolio Glossary---",
-    
-    "fun", "modes","quadratic-voting", 
-    "cryptocheer", "judging",
+    "creating-and-managing-your-account",
+    "fun",
+    "modes",
+    "quadratic-voting",
+    "cryptocheer",
+    "judging",
     "onchain-credentials",
-    
+
     "---🤹🏻‍♂️ Devfolio for organizers---",
 
     "set-up-your-first-hackathon-on-devfolio",
@@ -19,7 +22,7 @@
     "apply-with-devfolio-integration",
     "leaderboard",
     "faqs-for-organizers",
-    
+
     "---👨‍💻 Devfolio for Hackers---",
     "page-conventions",
     "markdown",
@@ -28,7 +31,5 @@
     "your-devfolio-profile",
     "participating-in-hackathons",
     "faqs-for-hackers"
-
-   
   ]
 }

@@ -18,7 +18,7 @@ const config = {
       {
         source: "/",
         destination: "/docs/guide/fun",
-        permanent: true, // set to false if it's a temporary redirect
+        permanent: false, // set to false if it's a temporary redirect
       },
     ];
   },

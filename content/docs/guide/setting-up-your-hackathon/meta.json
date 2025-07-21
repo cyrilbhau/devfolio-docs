@@ -1,8 +1,8 @@
 {
-  "title": "🔨 Setting up your Hackathon",
+  "title": "Setting up your Hackathon",
   "description": "Tabs to configure your hackathon on Devfolio",
   "icon": "Hammer",
-  
+
   "pages": [
     "basic-tab",
     "application-tab",

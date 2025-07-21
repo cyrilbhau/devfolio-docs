@@ -100,6 +100,7 @@ export function ViewOptions(props: { markdownUrl: string; githubUrl: string }) {
       </PopoverTrigger>
       <PopoverContent className="flex flex-col overflow-auto">
         {[
+          /*
           {
             title: "Open in GitHub",
             href: props.githubUrl,
@@ -110,6 +111,8 @@ export function ViewOptions(props: { markdownUrl: string; githubUrl: string }) {
               </svg>
             ),
           },
+          */
+          
           {
             title: "Open in ChatGPT",
             href: gpt,

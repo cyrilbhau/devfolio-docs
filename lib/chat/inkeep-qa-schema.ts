@@ -1,19 +1,22 @@
 import { z } from 'zod';
 
-const InkeepRecordTypes = z.enum([
+const DocumentationTypes = z.enum([
   'documentation',
+  'guide',
+  'tutorial',
+  'api_reference',
+  'example',
+  'troubleshooting',
+  'faq',
+  'changelog',
   'site',
-  'discourse_post',
   'github_issue',
   'github_discussion',
-  'stackoverflow_question',
-  'discord_forum_post',
-  'discord_message',
   'custom_question_answer',
 ]);
 
 const LinkType = z.union([
-  InkeepRecordTypes,
+  DocumentationTypes,
   z.string(), // catch all
 ]);
 
@@ -24,6 +27,7 @@ const LinkSchema = z
     title: z.string().nullish(),
     type: LinkType.nullish(),
     breadcrumbs: z.array(z.string()).nullish(),
+    description: z.string().nullish(), // Brief description of the link content
   })
   .passthrough();
 
@@ -46,9 +50,20 @@ const AnswerConfidence = z.union([KnownAnswerConfidence, z.string()]); // evolva
 const AIAnnotationsToolSchema = z
   .object({
     answerConfidence: AnswerConfidence,
+    sourceQuality: z.enum(['high', 'medium', 'low']).nullish(),
+    responseType: z.enum(['direct_answer', 'guidance', 'clarification_needed']).nullish(),
   })
   .passthrough();
 
 export const ProvideAIAnnotationsToolSchema = z.object({
   aiAnnotations: AIAnnotationsToolSchema,
+});
+
+// Additional schema for search functionality
+export const SearchQuerySchema = z.object({
+  query: z.string(),
+  filters: z.object({
+    type: DocumentationTypes.nullish(),
+    section: z.string().nullish(),
+  }).nullish(),
 });

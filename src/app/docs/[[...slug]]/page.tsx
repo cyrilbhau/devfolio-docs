@@ -61,18 +61,10 @@ export default async function Page(props: {
         {/*@ts-expect-error: this library type is incorrect in v3*/}
         <LLMCopyButton slug={params.slug} />
         <ViewOptions markdownUrl={`${page.url}.mdx`} githubUrl={`check`} />
-        <AISearchTrigger
-          aria-label="Ask AI"
-          className={cn(
-            buttonVariants({
-              variant: "outline",
-              size: "icon",
-              className: "text-fd-muted-foreground",
-            })
-          )}
-        >
-          <Sparkles className="size-4" />
-        </AISearchTrigger>
+        <div className="text-xs px-3 py-1.5 bg-fd-secondary/50 border border-fd-border rounded-lg text-fd-muted-foreground shadow-sm">
+  💡 Tip: Use this dropdown to get help from AI tools like ChatGPT or Claude.
+</div>
+
       </div>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>

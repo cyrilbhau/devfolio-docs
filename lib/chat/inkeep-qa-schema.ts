@@ -1,4 +1,4 @@
-import { z } from 'zod';
+/*import { z } from 'zod';
 
 const InkeepRecordTypes = z.enum([
   'documentation',
@@ -41,3 +41,4 @@ const AIAnnotationsToolSchema = z
 export const ProvideAIAnnotationsToolSchema = z.object({
   aiAnnotations: AIAnnotationsToolSchema,
 });
+*/

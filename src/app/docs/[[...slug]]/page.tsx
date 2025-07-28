@@ -11,12 +11,12 @@ import { getMDXComponents } from "@/mdx-components";
 import posthog from "posthog-js";
 import { Rate } from "@/components/rate";
 import { LLMCopyButton, ViewOptions } from "./page.client";
-import { AISearchTrigger } from "@/components/ai";
-import { cn } from "@/lib/utils";
+//import { AISearchTrigger } from "@/components/ai";
+//import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import { Sparkles } from "lucide-react";
+//import { Sparkles } from "lucide-react";
 
-const buttonVariants = cva(
+/*const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-fd-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fd-ring disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
@@ -44,7 +44,7 @@ const buttonVariants = cva(
     },
   }
 );
-
+*/
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {

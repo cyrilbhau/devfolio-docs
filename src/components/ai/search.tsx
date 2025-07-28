@@ -218,7 +218,7 @@ const roleName: Record<string, string> = {
 
 function Message({ message }: { message: Message }) {
   const { parts } = message;
-  let links: any[] = [];
+let links: { url: string; title?: string; label?: string }[] = [];
 
   for (const part of parts ?? []) {
     if (part.type !== 'tool-invocation') continue;

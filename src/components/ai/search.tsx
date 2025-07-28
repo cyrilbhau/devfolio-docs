@@ -29,8 +29,8 @@ import {
   DialogTitle,
 } from '@radix-ui/react-dialog';
 import { type Message, useChat, type UseChatHelpers } from '@ai-sdk/react';
-import type { ProvideLinksToolSchema } from '../../../lib/chat/inkeep-qa-schema';
-import type { z } from 'zod';
+//import type { ProvideLinksToolSchema } from '../../../lib/chat/inkeep-qa-schema';
+//import type { z } from 'zod';
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 
 const ChatContext = createContext<UseChatHelpers | null>(null);
@@ -218,7 +218,7 @@ const roleName: Record<string, string> = {
 
 function Message({ message }: { message: Message }) {
   const { parts } = message;
-  let links: z.infer<typeof ProvideLinksToolSchema>['links'] = [];
+  let links: any[] = [];
 
   for (const part of parts ?? []) {
     if (part.type !== 'tool-invocation') continue;
@@ -258,6 +258,7 @@ function Message({ message }: { message: Message }) {
     </div>
   );
 }
+
 
 function Pre(props: ComponentProps<'pre'>) {
   const code = Children.only(props.children) as ReactElement;

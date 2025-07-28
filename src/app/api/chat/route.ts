@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+/*export const runtime = 'edge';
 
 const openai = createOpenAI({
   apiKey: process.env.INKEEP_API_KEY,
@@ -26,3 +26,4 @@ export async function POST(req: Request) {
 
   return result.toDataStreamResponse();
 }
+*/

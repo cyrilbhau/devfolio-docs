@@ -13,7 +13,7 @@ import { Rate } from "@/components/rate";
 import { LLMCopyButton, ViewOptions } from "./page.client";
 //import { AISearchTrigger } from "@/components/ai";
 //import { cn } from "@/lib/utils";
-import { cva } from "class-variance-authority";
+//import { cva } from "class-variance-authority";
 //import { Sparkles } from "lucide-react";
 
 /*const buttonVariants = cva(
